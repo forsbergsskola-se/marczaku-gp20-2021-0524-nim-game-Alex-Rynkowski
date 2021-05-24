@@ -25,6 +25,7 @@ int PlayerInput(){
         cin >> playerInput;
         if (PlayerInputIsValid(playerInput))
             return playerInput;
+        cout << "Invalid input, jackass" << endl;
     }
 }
 
