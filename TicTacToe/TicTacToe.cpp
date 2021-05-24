@@ -65,18 +65,75 @@ void ReadPlayerTwoInput(int playerOne[], int playerTwo[]){
 
 }
 
+bool UpperRow(int* player){
+    return player[0] > 0 && player[1] > 0 && player[2] > 0;
+}
+
+bool MiddleRow(int* player){
+    return player[3] > 0 && player[4] > 0 && player[5] > 0;
+}
+
+bool LowerRow(int* player){
+    return player[6] > 0 && player[7] > 0 && player[8] > 0;
+}
+
+bool LeftRow(int* player){
+    return player[0] > 0 && player[3] > 0 && player[6] > 0;
+}
+
+bool RightRow(int* player){
+    return player[1] > 0 && player[4] > 0 && player[7] > 0;
+}
+
+bool VerticalMiddle(int* player){
+    return player[2] > 0 && player[5] > 0 && player[8] > 0;
+}
+
+bool DiagonalOne(int* player){
+    return player[0] > 0 && player[4] > 0 && player[8] > 0;
+}
+
+bool DiagonalTwo(int* player){
+    return player[2] > 0 && player[4] > 0 && player[6] > 0;
+}
+
+bool HorizontalRow(int* player){
+    return UpperRow(player) || MiddleRow(player) || LowerRow(player);
+}
+
+bool VerticalRow(int* player){
+    return LeftRow(player) || VerticalMiddle(player) || RightRow(player);
+}
+
+bool Diagonal(int* player){
+    return DiagonalOne(player) || DiagonalTwo(player);
+}
+
+bool ValidateWinCondition(int* player){
+    return HorizontalRow(player) || VerticalRow(player) || Diagonal(player);
+}
+
 int main(int argc, char* argv[]){
     int playerOne[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int playerTwo[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    Visualise(playerOne, playerTwo);
     while (true){
-        
+
         cout << "Player one, it's your turn" << endl;
         ReadPlayerOneInput(playerOne, playerTwo);
         Visualise(playerOne, playerTwo);
-        
+        if (ValidateWinCondition(playerOne)){
+            cout << "Player One is victorious!" << endl;
+            break;
+        }
+
         cout << "Player two, it's your turn" << endl;
         ReadPlayerTwoInput(playerOne, playerTwo);
         Visualise(playerOne, playerTwo);
+        if (ValidateWinCondition(playerTwo)){
+            cout << "Player Two is victorious!" << endl;
+            break;
+        }
     }
     return 0;
 }
