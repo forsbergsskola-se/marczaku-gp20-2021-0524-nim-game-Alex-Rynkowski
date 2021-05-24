@@ -113,9 +113,25 @@ bool ValidateWinCondition(int* player){
     return HorizontalRow(player) || VerticalRow(player) || Diagonal(player);
 }
 
+void AI(int* playerOne, int* playerTwo){
+    while (true){
+        int inputTwo = rand() % 9;
+        if (IsAvailableSlot(playerOne, playerTwo, inputTwo)){
+            playerTwo[inputTwo] = 2;
+            break;
+        }
+        //cout << "Invalid input, try again" << endl;
+    }
+}
+
 int main(int argc, char* argv[]){
     int playerOne[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int playerTwo[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    cout << "Enter 1 if you want to play again AI" << endl;
+    int Ai;
+    cin >> Ai;
+    bool playAgainstAI = Ai == 1;
     Visualise(playerOne, playerTwo);
     while (true){
 
@@ -128,7 +144,12 @@ int main(int argc, char* argv[]){
         }
 
         cout << "Player two, it's your turn" << endl;
-        ReadPlayerTwoInput(playerOne, playerTwo);
+        if (playAgainstAI){
+            AI(playerOne, playerTwo);
+        }
+        else{
+            ReadPlayerTwoInput(playerOne, playerTwo);
+        }
         Visualise(playerOne, playerTwo);
         if (ValidateWinCondition(playerTwo)){
             cout << "Player Two is victorious!" << endl;
