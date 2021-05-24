@@ -2,15 +2,15 @@
 
 using namespace std;
 
-bool VisualisePlayerOne(int playerOne[], int i){
+bool VisualisePlayerOne(int* playerOne, int i){
     return playerOne[i] > 0;
 }
 
-bool VisualisePlayerTwo(int playerTwo[], int i){
+bool VisualisePlayerTwo(int* playerTwo, int i){
     return playerTwo[i] > 0;
 }
 
-void Visualise(int playerOne[], int playerTwo[]){
+void Visualise(int* playerOne, int* playerTwo){
     for (int i = 0; i < 9; i++){
         if (VisualisePlayerOne(playerOne, i)){
             cout << " " << "x" << " ";
@@ -39,7 +39,7 @@ bool IsAvailableSlot(int playerOne[], int playerTwo[], int playerInput){
     return playerOne[playerInput] == 0 && playerTwo[playerInput] == 0 && IsValidInput(playerInput);
 }
 
-void ReadPlayerOneInput(int playerOne[], int playerTwo[]){
+void ReadPlayerOneInput(int* playerOne, int* playerTwo){
     while (true){
         int inputOne;
         cin >> inputOne;
@@ -52,7 +52,7 @@ void ReadPlayerOneInput(int playerOne[], int playerTwo[]){
 
 }
 
-void ReadPlayerTwoInput(int playerOne[], int playerTwo[]){
+void ReadPlayerTwoInput(int* playerOne, int* playerTwo){
     while (true){
         int inputTwo;;
         cin >> inputTwo;
