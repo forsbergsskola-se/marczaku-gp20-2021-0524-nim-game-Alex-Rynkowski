@@ -31,23 +31,51 @@ void Visualise(int playerOne[], int playerTwo[]){
     }
 }
 
+bool IsValidInput(int input){
+    return input >= 0 && input < 9;
+}
+
 bool IsAvailableSlot(int playerOne[], int playerTwo[], int playerInput){
-    return playerOne[playerInput] == 0 && playerTwo[playerInput] == 0;
+    return playerOne[playerInput] == 0 && playerTwo[playerInput] == 0 && IsValidInput(playerInput);
+}
+
+void ReadPlayerOneInput(int playerOne[], int playerTwo[]){
+    while (true){
+        int inputOne;
+        cin >> inputOne;
+        if (IsAvailableSlot(playerOne, playerTwo, inputOne)){
+            playerOne[inputOne] = 1;
+            break;
+        }
+        cout << "Invalid input, try again" << endl;
+    }
+
+}
+
+void ReadPlayerTwoInput(int playerOne[], int playerTwo[]){
+    while (true){
+        int inputTwo;;
+        cin >> inputTwo;
+        if (IsAvailableSlot(playerOne, playerTwo, inputTwo)){
+            playerTwo[inputTwo] = 2;
+            break;
+        }
+        cout << "Invalid input, try again" << endl;
+    }
+
 }
 
 int main(int argc, char* argv[]){
     int playerOne[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int playerTwo[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     while (true){
+        
         cout << "Player one, it's your turn" << endl;
-        int inputOne;
-        cin >> inputOne;
-        playerOne[inputOne] = 1;
+        ReadPlayerOneInput(playerOne, playerTwo);
         Visualise(playerOne, playerTwo);
+        
         cout << "Player two, it's your turn" << endl;
-        int inputTwo;
-        cin >> inputTwo;
-        playerTwo[inputTwo] = 2;
+        ReadPlayerTwoInput(playerOne, playerTwo);
         Visualise(playerOne, playerTwo);
     }
     return 0;
