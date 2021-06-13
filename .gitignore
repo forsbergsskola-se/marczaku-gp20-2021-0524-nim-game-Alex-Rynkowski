@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+NimGame/.idea/
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+*.idea
+Debug/
